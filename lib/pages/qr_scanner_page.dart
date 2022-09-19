@@ -26,6 +26,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   bool isScanned = false;
   mongo.DbCollection usersCollection = globalMongoDB!.collection('auth_users');
+  mongo.DbCollection eventsCollection = globalMongoDB!.collection('events');
 
 
   @override
@@ -138,7 +139,12 @@ class _QRScannerPageState extends State<QRScannerPage> {
   }
 
   Future<void> _showEventCheckInModal(String eventId) async{
-    Map<String, dynamic>? query = await usersCollection.findOne({'_id': mongo.ObjectId.fromHexString(eventId)});
+    if (eventId == ''){
+      isScanned = false;
+      return;
+    }
+
+    Map<String, dynamic>? query = await eventsCollection.findOne({'_id': mongo.ObjectId.fromHexString(eventId)});
     Event event = Event.fromJson(query!);
 
     await showDialog(
