@@ -15,7 +15,10 @@ void main() async {
 }
 
 Future<void> connectToDB() async {
-  globalMongoDB = await Db.create("mongodb+srv://dbUser:dbUserPassword@cluster0.jjlnnvp.mongodb.net/upecDevDB?retryWrites=true&w=majority&ssl=true");
+  // DEV DB
+  // globalMongoDB = await Db.create("mongodb+srv://dbUser:dbUserPassword@cluster0.jjlnnvp.mongodb.net/upecDevDB?retryWrites=true&w=majority&ssl=true");
+  // PROD DB
+  globalMongoDB = await Db.create("mongodb+srv://dbUser:dbUserPassword@cluster0.jjlnnvp.mongodb.net/upecProdDB?retryWrites=true&w=majority&ssl=true");
   await globalMongoDB!.open();
 }
 
