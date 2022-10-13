@@ -246,6 +246,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
               body: SingleChildScrollView(
                 child: attendanceList.isNotEmpty
                     ? ListView.builder(
+                        physics: const ScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: attendanceList.length,
                         itemBuilder: (context, index) {
